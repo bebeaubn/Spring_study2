@@ -1,42 +1,64 @@
 package controllers.member;
 
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/member/join")
+@RequestMapping("/member")
+@RequiredArgsConstructor  //이걸로 의존성 자동주입후 클래스 final 처리
 public class MemberController {
-    @GetMapping("/join")  // /member/join
-    public String join(){
 
+    //@Autowired   //의존성 자동 주입
+    private final JoinValidator joinValidator;
+
+    @GetMapping("/join") // /member/join
+    public String join(Model model) {
+        RequestJoin requestJoin = new RequestJoin();
+        // model.addAttribute("requestJoin", requestJoin);
         return "member/join";
     }
 
-    @PostMapping("/join") // /member/join
-    public String joinPs(){
+    @PostMapping("/join")
+    public String joinPs(@Valid RequestJoin join, Errors errors) {
 
-        System.out.println("유입?");
+        joinValidator.validate(join, errors);
+
+
+        if(errors.hasErrors()){
+            return "member/Join";
+            //검증 실패시 유입
+        }
+
+        /* model.addAttribute("requestJoin", join);
+           요청 객체와 동일 템플릿에 연결됨 -> 위에 request join 이걸로 한줄에 연결 가능
+           요청 데이터가 들어오면 가능 post 방식에 주로 이용됨
+           get 방식에 없으면 오류발생
+
+         */
+
 
         return "redirect:/member/login";
+        //검중 성공 -> 회원가입 처리
     }
 
-
     @GetMapping("/login")  // /member/login
-    public String login(){
+    public String join(@ModelAttribute RequestJoin join){   //그냥쓰면 클래스 이름이 기준 value값을 작성하면 작성된 값이 기준
 
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String loginPs(){
+    public String loginPs() {
 
         return "member/login";
     }
-
-
-
 
     /*
     @GetMapping("/member/join")
@@ -98,8 +120,5 @@ public class MemberController {
                 .build();
 
     }
-
-  */
+     */
 }
-
-

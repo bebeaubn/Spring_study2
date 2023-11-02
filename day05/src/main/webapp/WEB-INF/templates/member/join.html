@@ -5,12 +5,71 @@
 
     <main layout:fragment="content">
         <h1>회원가입</h1>
-        <form method="post" th:action="@{/member/join}">
+        [[$requestJoin}]]    <!-- post방식에 자동주입됨 -->
+        <form method="post" th:action="@{/member/join}" th:object="#{requestJoin}">
+
+            <dl>
+
+            <dt>아이디</dt>
+            <dd>
+                 <input type ="text" name="userId" th:filed="*{userId}">
+                <div th:each="err : ${#fileds.errors('userId')}" th:text="${err}"></div>
+            </dd>
+            </dl>
+            <dl>
+                <dt>비밀번호</dt>
+            <dd>
+                 <input type="password" name="userPw" th:filed="*{userPw}">
+                <div th:each="err : ${#fileds.error('userPw')}" th:text="${err}"></div>
+
+            </dd>
+            </dl>
+            <dl>
+                <dt>비밀번호 확인</dt>
+                <dd>
+
+                <input type="password"  name="confirmUserPw" th:filed="*{confirmUserPw}">
+                    <div th:each="err : ${#fileds.error('confirmUserPw')}" th:text="${err}"></div>
+            </dd>
+            </dl>
+            <dl>
+                <dt>회원명</dt>
+                <dd>
+
+                    <input type="text"  name="userNm" th:filed="*{userNm}">
+                    <div th:each="err : ${#fileds.error('userNm')}" th:text="${err}"></div>
+                </dd>
+            </dl>
+
+            <dl>
+                <dt>이메일</dt>
+
+                <dd>
+
+                    <input type="text" name="email" th:field="*{email}">
+                    <div th:each="err : ${#fileds.error('email')}" th:text="${err}"></div>
+
+                </dd>
+
+            </dl>
+                <dl>
+                 <dt>휴대전화번호 </dt>
+                    <dd>
+                    <input type="text" name="mobile" th:filed="*{.mobile}">
+                        <div th:each="err : ${#fileds.error('mobile')}" th:text="${err}"></div>
+
+                </dd>
+                </dl>
+            <div>
+              <input type="text" name="agree" value="true" id="agree"
+                     th:filed ="*{agree}">
+                <label for="agree">회원가입 약관에 동의합니다</label>
+                <div th:each="err : ${#fileds.error('agree')}" th:text="${err}">
+
+            </div>
 
             <button type="submit">가입하기</button>
         </form>
-
-
 
 
     </main>
