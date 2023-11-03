@@ -76,7 +76,7 @@
             <artifactId>thymeleaf-layout-dialect</artifactId>
             <version>3.3.0</version>
         </dependency>
-<<<<<<< HEAD
+
         <dependency>
             <groupId>jakarta.validation</groupId>
             <artifactId>jakarta.validation-api</artifactId>
@@ -88,8 +88,7 @@
             <version>8.0.1.Final</version>
         </dependency>
 
-=======
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
+
 
     </dependencies>
 </project>

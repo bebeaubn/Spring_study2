@@ -24,22 +24,25 @@ public class JoinValidator implements Validator, MobileValidator {
          * 3.휴대전회번호(필수x) ->입력되면 형식 체크
          */
 
-        //
+
 
         String userId = form.getUserId();
         String userPw = form.getUserPw();
-        String confirUserPw = form.getConfirmUserPw();
+        String confirmUserPw = form.getConfirmUserPw();
         String mobile = form.getMobile();
 
+
+
         // 2.비밀번호, 비밀번호 확인 일치여부
-        if(userPw != null && !userPw.isBlank()
-                && confirUserPw != null && !confirUserPw.isBlank()
-                && !userPw.equals(confirUserPw)){
-          errors.rejectValue("confirmUserPw", "Mismatch");
+        if (userPw != null && !userPw.isBlank()
+                && confirmUserPw != null && !confirmUserPw.isBlank()       //검증할 데이터가 있는지 확인
+                && !userPw.equals(confirmUserPw)) {
+            errors.rejectValue("confirmUserPw", "Mismatch");
         }
         // 3.휴대전회번호(필수x) ->입력되면 형식 체크
-        if(mobile != null && !mobile.isBlank() && !checkMobile()) {
+        if (mobile != null && !mobile.isBlank() && !checkMobile(mobile)) {
             errors.rejectValue("mobile", "Mobile");
+
 
         }
     }

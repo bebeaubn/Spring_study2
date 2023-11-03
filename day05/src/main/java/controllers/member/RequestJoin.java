@@ -9,11 +9,11 @@ import lombok.Data;
 @Data   //데이터를 담을수있는 게터 세터 등등 설정 들어감
 public class RequestJoin {
     @NotBlank
-    @Size(min=6)
+    @Size(min=6)     //자릿수 유효성 검사  ->1차검증
     private String userId;
 
     @NotBlank
-    @Size(min=8, max=16)
+    @Size(min=8, max=16)     //자릿수 유효성 검사 ->1차검증
     private String userPw;
 
     @NotBlank

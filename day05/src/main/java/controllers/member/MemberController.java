@@ -1,102 +1,56 @@
 package controllers.member;
 
-<<<<<<< HEAD
+
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-=======
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-<<<<<<< HEAD
 @RequestMapping("/member")
-@RequiredArgsConstructor  //이걸로 의존성 자동주입후 클래스 final 처리
+@RequiredArgsConstructor
 public class MemberController {
 
-    //@Autowired   //의존성 자동 주입
     private final JoinValidator joinValidator;
 
     @GetMapping("/join") // /member/join
-    public String join(Model model) {
-        RequestJoin requestJoin = new RequestJoin();
-        // model.addAttribute("requestJoin", requestJoin);
+    public String join(@ModelAttribute RequestJoin join) {
+
         return "member/join";
     }
 
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin join, Errors errors) {
 
+
         joinValidator.validate(join, errors);
 
-
-        if(errors.hasErrors()){
-            return "member/Join";
-            //검증 실패시 유입
+        if (errors.hasErrors()) {
+            // 검증 실패시 유입
+            return "member/join";
         }
 
-        /* model.addAttribute("requestJoin", join);
-           요청 객체와 동일 템플릿에 연결됨 -> 위에 request join 이걸로 한줄에 연결 가능
-           요청 데이터가 들어오면 가능 post 방식에 주로 이용됨
-           get 방식에 없으면 오류발생
-
-         */
-
-
-        return "redirect:/member/login";
-        //검중 성공 -> 회원가입 처리
-    }
-
-    @GetMapping("/login")  // /member/login
-    public String join(@ModelAttribute RequestJoin join){   //그냥쓰면 클래스 이름이 기준 value값을 작성하면 작성된 값이 기준
-=======
-@RequestMapping("/member/join")
-public class MemberController {
-    @GetMapping("/join")  // /member/join
-    public String join(){
-
-        return "member/join";
-    }
-
-    @PostMapping("/join") // /member/join
-    public String joinPs(){
-
-        System.out.println("유입?");
+        // 검증 성공 -> 회원가입 처리
 
         return "redirect:/member/login";
     }
 
-
     @GetMapping("/login")  // /member/login
-    public String login(){
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
+    public String login() {
 
         return "member/login";
     }
 
     @PostMapping("/login")
-<<<<<<< HEAD
     public String loginPs() {
-=======
-    public String loginPs(){
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
 
         return "member/login";
     }
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
     /*
     @GetMapping("/member/join")
     public String join(Model model) {
@@ -157,13 +111,5 @@ public class MemberController {
                 .build();
 
     }
-<<<<<<< HEAD
      */
 }
-=======
-
-  */
-}
-
-
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
