@@ -1,23 +1,26 @@
 package models.members;
 
-import commons.Validator;
 import controllers.member.RequestJoin;
+import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
+import org.springframework.stereotype.Service;
 
+@Service
+@RequiredArgsConstructor
 public class JoinService {
-    private Validator validator;
-    private MemberDao memberDao;
 
-    public JoinService(Validator validator, MemberDao memberDao) {
-        this.validator = validator;
-        this.memberDao = memberDao;
-    }
+    private final JoinValidator validator;
+    private final MemberDao memberDao;
+
 
     public void join(RequestJoin form) {
 
         validator.check(form);
 
+        Member member = new ModelMapper().map(form, Member.class);
 
-        //memberDao.register(from);
-      }
+        memberDao.register(member);
+    }
+
 
 }

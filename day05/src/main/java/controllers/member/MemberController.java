@@ -3,6 +3,7 @@ package controllers.member;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import models.members.JoinService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class MemberController {
 
     private final JoinValidator joinValidator;
+    private final JoinService joinService;
 
     @GetMapping("/join") // /member/join
     public String join(@ModelAttribute RequestJoin join) {
@@ -26,7 +28,6 @@ public class MemberController {
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin join, Errors errors) {
 
-
         joinValidator.validate(join, errors);
 
         if (errors.hasErrors()) {
@@ -35,22 +36,36 @@ public class MemberController {
         }
 
         // 검증 성공 -> 회원가입 처리
+        joinService.join(join);
 
         return "redirect:/member/login";
     }
 
     @GetMapping("/login")  // /member/login
-    public String login() {
+    public String login(@ModelAttribute RequestLogin form) {
 
         return "member/login";
     }
 
     @PostMapping("/login")
-    public String loginPs() {
+    public String loginPs(@Valid RequestLogin form, Errors errors) {
 
-        return "member/login";
+        if (errors.hasErrors()) {
+            return "member/login";
+        }
+
+        // 유효성 검사 성공 -> 로그인 처리
+
+        return "redirect:/";
+
     }
 
+    /*
+    @InitBinder
+    public void initBinder(WebDataBinder binder) {
+        binder.setValidator(joinValidator);
+    }
+    */
     /*
     @GetMapping("/member/join")
     public String join(Model model) {

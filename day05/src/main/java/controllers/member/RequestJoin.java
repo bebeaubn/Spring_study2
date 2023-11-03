@@ -30,6 +30,14 @@ public class RequestJoin {
     @AssertTrue
     private boolean agree;
 
+    private Address addr;  //addr.address, addr.zipcode
+
+
+   // private String[] hobby;
+
+
+
+
 
     /* 맴버 변수명과 동일한 메서드가 있으면 자동적으로 넣어준다 ->커맨드 -->요청데이터에서 하고자 하는 데이터를 사용하는 경우 (검색) 등등}
 

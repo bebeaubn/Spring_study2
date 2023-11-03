@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>로그인</title>
+mlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+layout:decorate="~{layouts/main}">
+<main layout:fragment="content"></main>
 
-</head>
-<body>
 <form method="post">
 
 <dl>
@@ -29,5 +27,5 @@
         <a th:href="{@/member/join?key1={key1}(key1=${userId}, key2=value2)}" th:text="#{회원가입}"></a>
     </div>
 </form>
-</body>
+</main>
 </html>

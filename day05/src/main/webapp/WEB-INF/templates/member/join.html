@@ -1,36 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
       layout:decorate="~{layouts/main}">
 
     <main layout:fragment="content">
         <h1>회원가입</h1>
 <<<<<<< HEAD
         [[$requestJoin}]]    <!-- post방식에 자동주입됨 -->
-        <form method="post" th:action="@{/member/join}" th:object="#{requestJoin}">
+        <form method="post"  th:action ="@{member/login}"th:odject="${requestLogin}">
 
             <dl>
 
-            <dt>아이디</dt>
+            <dt th:text ='#{아이디}'아이디></dt>
             <dd>
                  <input type ="text" name="userId" th:filed="*{userId}">
-                <div th:each="err : ${#fileds.errors('userId')}" th:text="${err}"></div>
             </dd>
             </dl>
             <dl>
-                <dt>비밀번호</dt>
+                <dt th:text ="#{비밀번호}">비밀번호</dt>
             <dd>
                  <input type="password" name="userPw" th:filed="*{userPw}">
-                <div th:each="err : ${#fileds.error('userPw')}" th:text="${err}"></div>
 
             </dd>
             </dl>
+            <div>
+                <input type="text" name="saveId" value="true" id="saveId" th:field="*{saveId}">
+
+            </div>
             <dl>
                 <dt>비밀번호 확인</dt>
                 <dd>
 
                 <input type="password"  name="confirmUserPw" th:filed="*{confirmUserPw}">
-                    <div th:each="err : ${#fileds.error('confirmUserPw')}" th:text="${err}"></div>
             </dd>
             </dl>
             <dl>
@@ -61,26 +62,33 @@
 
                 </dd>
                 </dl>
+            <dl>
+                <dt>주소</dt>
+                <dd>
+                    <input type="text" name="addr.zipcode" placeholder="우편번호" th:field="*{addr.zipcode}">
+                    <input type="text" name="addr.address" placeholder="주소" th:filed="*{addr.address}">
+                    <input type="text" name="addr.addressSub" placeholder="나머지 주소" th:filed="*{addr.addressSub}">
+                </dd>
+            </dl>
+
             <div>
+
               <input type="text" name="agree" value="true" id="agree"
                      th:filed ="*{agree}">
                 <label for="agree">회원가입 약관에 동의합니다</label>
                 <div th:each="err : ${#fileds.error('agree')}" th:text="${err}">
 
             </div>
-=======
+
         <form method="post" th:action="@{/member/join}">
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
+
 
             <button type="submit">가입하기</button>
         </form>
 
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 84b41a628d9bb22a5e637c2bf1d2324be95e45de
     </main>
+
 
 </html>
