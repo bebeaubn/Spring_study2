@@ -14,7 +14,6 @@ import java.util.List;
 
 @Repository
 @RequiredArgsConstructor
-
 public class MemberDao {
 
     private final JdbcTemplate jdbcTemplate;

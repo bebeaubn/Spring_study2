@@ -5,7 +5,9 @@ import commons.LengthValidator;
 import commons.RequiredValidator;
 import commons.Validator;
 import controllers.member.RequestJoin;
+import org.springframework.stereotype.Component;
 
+@Component("joinValidator2")
 public class JoinValidator implements Validator<RequestJoin>, RequiredValidator, LengthValidator {
 
     private MemberDao memberDao;
