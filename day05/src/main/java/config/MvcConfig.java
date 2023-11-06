@@ -22,6 +22,29 @@ public class MvcConfig implements WebMvcConfigurer {
 
 
     @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(memberOnlyInterceptor())
+                .addPathPatterns("/mypage/**");     //마이페이지에 접근 못하게 하는거
+        registry.addInterceptor(commonInterceptor())
+                .addPathPatterns(("/**"));
+
+    }
+
+    @Bean
+    public CommonInterceptor commonInterceptor (){
+        return new CommonInterceptor();
+
+
+    }
+
+
+    @Bean
+    public MemberOnlyInterceptor memberOnlyInterceptor (){
+        return new MemberOnlyInterceptor();      //마이페이지
+
+    }
+
+    @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/")
                 .setViewName("main/index");
