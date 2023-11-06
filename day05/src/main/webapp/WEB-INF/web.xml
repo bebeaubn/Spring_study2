@@ -20,6 +20,10 @@
                 config.ControllerConfig
             </param-value>
         </init-param>
+        <multipart-config>
+            <max-file-size>20971520</max-file-size>
+            <max-request-size>41943040</max-request-size>
+        </multipart-config>
     </servlet>
     <servlet-mapping>
         <servlet-name>dispatcher</servlet-name>
