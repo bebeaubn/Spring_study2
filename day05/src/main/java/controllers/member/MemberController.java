@@ -26,13 +26,13 @@ public class MemberController {
     @PostMapping("/join")
     public String joinPs(@Valid RequestJoin join, Errors errors) {
 
-        joinValidator.validate(join, errors);
-
+      //  joinValidator.validate(join, errors);
+/*
         if (errors.hasErrors()) {
             // 검증 실패시 유입
             return "member/join";
         }
-
+*/
         // 검증 성공 -> 회원가입 처리
         joinService.join(join);
 
@@ -67,12 +67,28 @@ public class MemberController {
 
     }
 
+    //memberController 한정 예외 페이지 처리
+/*
+    @ExceptionHandler(Exception.class)
+    public String errorHandler(Exception e, Model model){
+        e.printStackTrace();
+        model.addAttribute("message", e.getMessage());
+
+
+        return "error/common";
+    }
+ */
+
+
+
     /*
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.setValidator(joinValidator);
     }
     */
+
+
     /*
     @GetMapping("/member/join")
     public String join(Model model) {
